@@ -30,9 +30,11 @@ func main(){
 		response.Code = 200
 		json.NewEncoder(res).Encode(response)
 	}).Methods("get")
-	router.HandleFunc("/orders", orderService.GetOrders).Methods("get")
-	router.HandleFunc("/orders", orderService.StoreOrder).Methods("post")
-	router.HandleFunc("/orders/{id}", orderService.GetOrder).Methods("get")
+	router.HandleFunc("/orders", orderService.GetOrders).Methods("GET")
+	router.HandleFunc("/orders", orderService.StoreOrder).Methods("POST")
+	router.HandleFunc("/orders/{order_id}", orderService.GetOrder).Methods("GET")
+	router.HandleFunc("/orders", orderService.UpdateOrder).Methods("PUT")
+	router.HandleFunc("/orders/{order_id}", orderService.DeleteOrder).Methods("DELETE")
 
 	fmt.Println("server running on port 8080")
 	http.ListenAndServe(":8080", router)
